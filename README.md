@@ -17,3 +17,5 @@ Future home of an "appcache" smart package.
 - [ ] client-side error logging and reporting that works offline and across page reloads
 - [ ] "online" directory for assets too big to be cached
 - [ ] Option to specify additional URLs to be cached (e.g. images from another domain such as a CDN)
+- [ ] Reactive data source which indicates whether the app is currently cached or not (an app may not be cached because this is the first visit and the cache is loading, the browser doesn't support it, the programmer specified that the app cache should not be used for particular browsers, the user declined to allow offline use in Firefox, app caching is disabled for the domain in the browser settings, etc.
+- [ ] Reactive data source which indicates that a code update is available.  (That is, not a major one, since a major one triggers an automatic reload).
