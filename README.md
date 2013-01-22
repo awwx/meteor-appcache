@@ -12,7 +12,8 @@ Future home of an "appcache" smart package.
 - [ ] Option to enable/disable verbose logging by the browser if so
 - [ ] Option to disable app caching for particular browsers
 - [ ] Support URL routing: does manifest fallback work for this?
-- [ ] Different cache manifests for different URLs? (e.g. cache the images to view one slideshow offline)
+- [ ] Different cache manifests for different URLs? (e.g. cache the images of one slideshow to view offline)
+- [ ] ...or is there a better way to cache assets conditionally?  Maybe using client storage instead of the app cache...? Especially for Chrome which has a 5mb app cache limit.
 - [ ] client-side error logging and reporting that works offline and across page reloads
 - [ ] "online" directory for assets too big to be cached
 - [ ] Option to specify additional URLs to be cached (e.g. images from another domain such as a CDN)
