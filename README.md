@@ -4,6 +4,28 @@ appcache
 Future home of the appcache smart package.
 
 
+Testing Only
+------------
+
+This release is for testing only.  (The code currently doesn't even
+bother to check to see whether `window.applicationCache` exists or
+not, and so will crash on a browser that doesn't support app caches).
+
+Testers should be comfortable with and know how to manually delete the
+app cache in their browser.  It is remarkably easy with an app cache
+to get wedged where a configuration error causes the browser to not
+refresh the cached app with new code from the server.  I hope don't
+have any more bugs like that left, but I wouldn't count on it.
+
+DO NOT USE THIS CODE for users of an app published on a domain if
+there is ANY chance that you will EVER want to go back to using
+standard Meteor on that domain.  Standard Meteor does not return a 404
+for the app manifest file, so your users will be STUCK running your
+old code out of their app cache even though YOU aren't using the
+appcache package any more.  (See
+https://github.com/meteor/meteor/pull/628).
+
+
 Meteor Changes
 --------------
 
