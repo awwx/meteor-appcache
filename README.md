@@ -21,20 +21,47 @@ DO NOT USE THIS CODE for users of an app published on a domain if
 there is ANY chance that you will EVER want to go back to using
 standard Meteor on that domain.  Standard Meteor does not return a 404
 for the app manifest file, so your users will be STUCK running your
-old code out of their app cache even though YOU aren't using the
+old code out of their app cache even though you aren't using the
 appcache package any more.  (See
 https://github.com/meteor/meteor/pull/628).
+
+
+Use
+---
+
+The appcache package relies on modifications to Meteor.  These are
+based off of and follow Meteor's development branch (which may be
+unstable).
+
+With
+[meteorite](http://oortcloud.github.com/meteorite/) use a smart.json
+like this:
+
+    {
+      "meteor": {
+        "git": "git://github.com/awwx/meteor.git",
+        "tag": "appcache-bundle-2"
+      },
+      "packages": {
+        "appcache": {
+          "git": "git://github.com/awwx/meteor-appcache.git",
+          "tag": "appcache-2"
+        }
+      }
+    }
+
+keep the tag numbers in sync: appcache-bundle-2 with appcache-2, etc.
 
 
 Meteor Changes
 --------------
 
-* detect-update-avail-on-first-connection
-* dont-cache-static
-* app-manifest-404
-* bundler-record-urls
+* [app-manifest-404](https://github.com/awwx/meteor/tree/app-manifest-404) (https://github.com/meteor/meteor/pull/628)
+* [detect-update-avail-on-first-connection](https://github.com/awwx/meteor/tree/detect-update-avail-on-first-connection)
+* [dont-cache-static](https://github.com/awwx/meteor/tree/dont-cache-static)
+* [bundler-record-urls](https://github.com/awwx/meteor/tree/bundler-record-urls)
 
-Combined in appcache-bundle-2
+Combined in [appcache-bundle-2](https://github.com/awwx/meteor/tree/appcache-bundle-2).
 
 
 TODO
