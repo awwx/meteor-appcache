@@ -14,7 +14,7 @@ not, and so will crash on a browser that doesn't support app caches).
 Testers should be comfortable with and know how to manually delete the
 app cache in their browser.  It is remarkably easy with an app cache
 to get wedged where a configuration error causes the browser to not
-refresh the cached app with new code from the server.  I hope don't
+refresh the cached app with new code from the server.  I hope I don't
 have any more bugs like that left, but I wouldn't count on it.
 
 DO NOT USE THIS CODE for users of an app published on a domain if
@@ -30,8 +30,8 @@ Use
 ---
 
 The appcache package relies on modifications to Meteor.  These are
-based off of and follow Meteor's development branch (which may be
-unstable).
+based off of and follow Meteor's development branch (which may itself
+be unstable sometimes).
 
 With
 [meteorite](http://oortcloud.github.com/meteorite/) use a smart.json
