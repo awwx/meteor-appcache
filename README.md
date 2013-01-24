@@ -59,7 +59,7 @@ Meteor Changes
 * [dont-cache-static](https://github.com/awwx/meteor/tree/dont-cache-static)
 * [bundler-record-urls](https://github.com/awwx/meteor/tree/bundler-record-urls)
 
-Combined in [appcache-bundle-2](https://github.com/awwx/meteor/tree/appcache-bundle-2).
+Combined in [appcache-bundle-3](https://github.com/awwx/meteor/tree/appcache-bundle-3).
 
 
 TODO
