@@ -7,9 +7,7 @@ Future home of the appcache smart package.
 Testing Only
 ------------
 
-This release is for testing only.  (The code currently doesn't even
-bother to check to see whether `window.applicationCache` exists or
-not, and so will crash on a browser that doesn't support app caches).
+This release is for testing only.
 
 Testers should be comfortable with and know how to manually delete the
 app cache in their browser.  It is remarkably easy with an app cache
@@ -40,17 +38,17 @@ like this:
     {
       "meteor": {
         "git": "git://github.com/awwx/meteor.git",
-        "tag": "appcache-bundle-2"
+        "tag": "appcache-bundle-3"
       },
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-2"
+          "tag": "appcache-3"
         }
       }
     }
 
-keep the tag numbers in sync: appcache-bundle-2 with appcache-2, etc.
+keep the tag numbers in sync: appcache-bundle-3 with appcache-3, etc.
 
 
 Meteor Changes
@@ -67,9 +65,7 @@ Combined in [appcache-bundle-2](https://github.com/awwx/meteor/tree/appcache-bun
 TODO
 ----
 
-- [ ] Handle browsers that don't support an app cache.  (Current code
-      doesn't bother to check for the existence of
-      `window.applicationCache` etc).
+- [x] Handle browsers that don't support an app cache.
 
 - [x] Files in static/ need to not be cached.
 

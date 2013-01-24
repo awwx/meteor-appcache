@@ -2,6 +2,10 @@
 (function() {
   var appcache_updated, cache_is_now_up_to_date, reload_retry, updating_appcache;
 
+  if (window.applicationCache == null) {
+    return;
+  }
+
   updating_appcache = false;
 
   reload_retry = null;
@@ -9,7 +13,6 @@
   appcache_updated = false;
 
   Meteor._reload.onMigrate('appcache', function(retry) {
-    console.log('-- migrate');
     if (appcache_updated) {
       return [true];
     }

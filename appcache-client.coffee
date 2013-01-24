@@ -1,9 +1,10 @@
+return unless window.applicationCache?
+
 updating_appcache = false
 reload_retry = null
 appcache_updated = false
 
 Meteor._reload.onMigrate 'appcache', (retry) ->
-  console.log '-- migrate'
   return [true] if appcache_updated
 
   unless updating_appcache
