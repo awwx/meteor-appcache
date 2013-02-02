@@ -16,20 +16,21 @@ refresh the cached app with new code from the server.  I hope I don't
 have any more bugs like that left, but I wouldn't count on it.
 
 DO NOT USE THIS CODE for users of an app published on a domain if
-there is ANY chance that you will EVER want to go back to using
-standard Meteor on that domain.  Standard Meteor does not return a 404
-for the app manifest file, so your users will be STUCK running your
-old code out of their app cache even though you aren't using the
-appcache package any more.  (See
-https://github.com/meteor/meteor/pull/628).
+there is ANY chance that you will EVER want to go back to using Meteor
+<= 0.5.4 on that domain.  The currently released version of Meteor
+does not return a 404 for the app manifest file, so your users will be
+STUCK running your old code out of their app cache even though you
+aren't using the appcache package any more.  (A workaround has been
+merged into Meteor's devel branch, so this should not be a problem for
+Meteor versions >= 0.5.5).
 
 
 Use
 ---
 
-The appcache package relies on modifications to Meteor.  These are
-based off of and follow Meteor's development branch (which may itself
-be unstable sometimes).
+The appcache package relies on hacks to Meteor; these hacks need
+further work before they're ready to be made into pull requests.  The
+hacks are based off of and follow Meteor's development branch.
 
 With
 [meteorite](http://oortcloud.github.com/meteorite/) use a smart.json
@@ -38,28 +39,29 @@ like this:
     {
       "meteor": {
         "git": "git://github.com/awwx/meteor.git",
-        "tag": "appcache-bundle-3"
+        "tag": "appcache-bundle-4"
       },
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-3"
+          "tag": "appcache-4"
         }
       }
     }
 
-keep the tag numbers in sync: appcache-bundle-3 with appcache-3, etc.
+keep the tag numbers in sync: appcache-bundle-4 with appcache-4, etc.
 
 
 Meteor Changes
 --------------
 
-* [app-manifest-404](https://github.com/awwx/meteor/tree/app-manifest-404) (https://github.com/meteor/meteor/pull/628)
-* [detect-update-avail-on-first-connection](https://github.com/awwx/meteor/tree/detect-update-avail-on-first-connection)
-* [dont-cache-static](https://github.com/awwx/meteor/tree/dont-cache-static)
-* [bundler-record-urls](https://github.com/awwx/meteor/tree/bundler-record-urls)
+* 404 on app.manifest (merged into Meteor devel https://github.com/meteor/meteor/commit/df93f65)
+* Detect update available on first stream connection (merged into Meteor devel https://github.com/meteor/meteor/commit/514bf73)
+* [dont-cache-static-2](https://github.com/awwx/meteor/tree/dont-cache-static-2)
+* [bundler-record-urls-2](https://github.com/awwx/meteor/tree/bundler-record-urls-2)
+* [app-html-include-manifest-1](https://github.com/awwx/meteor/tree/app-html-include-manifest-1)
 
-Combined in [appcache-bundle-3](https://github.com/awwx/meteor/tree/appcache-bundle-3).
+Combined in [appcache-bundle-4](https://github.com/awwx/meteor/tree/appcache-bundle-4).
 
 
 TODO
