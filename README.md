@@ -21,7 +21,7 @@ to be saved in the browser.
 * The application cache allows the application to be loaded even when
   the browser doesn't have an Internet connection, and so enables using
   the app offline.  Note however that the app cache by itself doesn't do
-  anything to make *data* available offline; a Meteor Collection will
+  anything to make *data* available offline: a Meteor Collection will
   appear to be empty in the client until the Internet becomes available
   again and the browser is able to establish a livedata connection.
 
@@ -88,6 +88,13 @@ Combined in [appcache-bundle-4](https://github.com/awwx/meteor/tree/appcache-bun
 
 TODO
 ----
+
+- [ ] We need a version of gzippo that supports a cache control header with max-age set to
+      zero (https://github.com/tomgco/gzippo/pull/49).  (What happens with the app cache
+      is that browsers actually pay attention to the cache control headers, and then
+      the browser doesn't fetch modified resources).
+
+- [ ] Hook to allow the appcache package to set the manifest attribute in the html element.
 
 - [x] Handle browsers that don't support an app cache.
 
