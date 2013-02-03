@@ -4,6 +4,28 @@ appcache
 Future home of the appcache smart package.
 
 
+About
+-----
+
+The application cache is an HTML5 feature which allows the static
+resources for a web application (HTML, Javascript, CSS, images)
+to be saved in the browser.
+
+* The web page loads faster because the browser doesn't need to contact
+  the server first.
+
+* Hot code pushes are loaded by the browser in the background while the
+  app continues to run.  Once the new code has been fully loaded the
+  browser is able to switch over to the new code quickly.
+
+* The application cache allows the application to be loaded even when
+  the browser doesn't have an Internet connection, and so enables using
+  the app offline.  Note however that the app cache by itself doesn't do
+  anything to make *data* available offline; a Meteor Collection will
+  appear to be empty in the client until the Internet becomes available
+  again and the browser is able to establish a livedata connection.
+
+
 Testing Only
 ------------
 
