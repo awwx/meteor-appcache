@@ -2,8 +2,8 @@ appcache
 ========
 
 Future home of the appcache smart package, currently under
-development but not ready to be used with applications
-published to users yet.
+development.  (Not ready to be used with applications
+published to users yet).
 
 
 About
