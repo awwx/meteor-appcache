@@ -1,7 +1,9 @@
 appcache
 ========
 
-Future home of the appcache smart package.
+Future home of the appcache smart package, currently under
+development but not ready to be used with applications
+published to users yet.
 
 
 About
@@ -26,6 +28,31 @@ to be saved in the browser.
   again and the browser is able to establish a livedata connection.
 
 
+Browser Support
+---------------
+
+The app cache enjoys wide browser support (http://caniuse.com/#feat=offline-apps);
+even IE 10 includes it now.  Older browsers will simply ignore the manifest
+attribute and the app will run as a regular online application.
+
+Chrome has a hard 5MB limit on the size of the app cache.  Sadly if you go
+over the limit Chrome doesn't do something sensible like fall back
+to treating the app like an online application but instead continues
+serve the app out of the stale cache... *and* the error condition is
+indistinguishable on the client and server from the client simply not
+having an Internet connection at the moment.  So if you want to use
+an app cache with Chrome you simply have to be very very careful that
+you never ever ever go over the 5MB limit or you're screwed.
+
+Firefox pops up a message "This website is asking to store data on your
+computer for offline use" Allow / Never For This Site / Not Now.  Which
+may or may not be OK depending on your audience and whether they're
+expecting the request or might be freaked out about it.
+
+My plan is to allow the developer to specify which browsers to enable the app
+cache for, and make Chrome and Firefox opt-in.
+
+
 Testing Only
 ------------
 
@@ -34,8 +61,11 @@ This release is for testing only.
 Testers should be comfortable with and know how to manually delete the
 app cache in their browser.  It is remarkably easy with an app cache
 to get wedged where a configuration error causes the browser to not
-refresh the cached app with new code from the server.  I hope I don't
-have any more bugs like that left, but I wouldn't count on it.
+refresh the cached app with new code from the server.  You're then
+stuck because you can fix things on the server all you want but none
+of those fixes get to the client because the browser isn't contacting
+the server any more.  (I hope I don't have any more bugs like that left,
+but don't count on it yet).
 
 DO NOT USE THIS CODE for users of an app published on a domain if
 there is ANY chance that you will EVER want to go back to using Meteor
@@ -89,12 +119,19 @@ Combined in [appcache-bundle-4](https://github.com/awwx/meteor/tree/appcache-bun
 TODO
 ----
 
-- [ ] We need a version of gzippo that supports a cache control header with max-age set to
-      zero (https://github.com/tomgco/gzippo/pull/49).  (What happens with the app cache
-      is that browsers actually pay attention to the cache control headers, and then
-      the browser doesn't fetch modified resources).
+- [ ] We'll need a version of gzippo that supports a cache control header with max-age
+      set to zero (https://github.com/tomgco/gzippo/pull/49).  (What happens with the
+      app cache is that browsers actually pay attention to the cache control headers,
+      and then the browser doesn't fetch modified resources).
 
-- [ ] Hook to allow the appcache package to set the manifest attribute in the html element.
+- [ ] Check total size of files included in the manifest and warn or disable the
+      app cache if Chrome is enabled and the total size > 5MB.
+
+- [ ] Meteor hook to allow the appcache package to set the manifest attribute in the
+      html element.
+
+- [ ] Server-side browser detection so that the developer can choose which
+      browsers they want to enable the app cache for.
 
 - [x] Handle browsers that don't support an app cache.
 
