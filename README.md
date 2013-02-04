@@ -119,6 +119,10 @@ Combined in [appcache-bundle-4](https://github.com/awwx/meteor/tree/appcache-bun
 TODO
 ----
 
+- [ ] Check how the app cache interacts with the accounts system.  (For example,
+      do we need to not cache particular URLs used for logging in, etc.?  And if
+      so, how should a package declare its requirements?)
+
 - [ ] We'll need a version of gzippo that supports a cache control header with max-age
       set to zero (https://github.com/tomgco/gzippo/pull/49).  (What happens with the
       app cache is that browsers actually pay attention to the cache control headers,
