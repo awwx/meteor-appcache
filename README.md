@@ -22,10 +22,11 @@ to be saved in the browser.
 
 * The application cache allows the application to be loaded even when
   the browser doesn't have an Internet connection, and so enables using
-  the app offline.  Note however that the app cache by itself doesn't do
-  anything to make *data* available offline: a Meteor Collection will
-  appear to be empty in the client until the Internet becomes available
-  again and the browser is able to establish a livedata connection.
+  the app offline.  (Note however that the app cache by itself doesn't do
+  anything to make *data* available offline: in an application loaded
+  offline, a Meteor Collection will appear to be empty in the client until
+  the Internet becomes available and the browser is able to establish a
+  livedata connection).
 
 
 Browser Support
