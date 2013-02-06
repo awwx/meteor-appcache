@@ -22,11 +22,13 @@ to be saved in the browser.
 
 * The application cache allows the application to be loaded even when
   the browser doesn't have an Internet connection, and so enables using
-  the app offline.  (Note however that the app cache by itself doesn't do
-  anything to make *data* available offline: in an application loaded
-  offline, a Meteor Collection will appear to be empty in the client until
-  the Internet becomes available and the browser is able to establish a
-  livedata connection).
+  the app offline.
+
+(Note however that the app cache by itself doesn't do anything to make
+*data* available offline: in an application loaded offline, a Meteor
+Collection will appear to be empty in the client until the Internet
+becomes available and the browser is able to establish a livedata
+connection).
 
 
 Browser Support
@@ -92,17 +94,17 @@ like this:
     {
       "meteor": {
         "git": "git://github.com/awwx/meteor.git",
-        "tag": "appcache-bundle-4"
+        "tag": "appcache-bundle-5"
       },
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-4"
+          "tag": "appcache-5"
         }
       }
     }
 
-keep the tag numbers in sync: appcache-bundle-4 with appcache-4, etc.
+keep the tag numbers in sync: appcache-bundle-5 with appcache-5, etc.
 
 
 Meteor Changes
@@ -111,10 +113,10 @@ Meteor Changes
 * 404 on app.manifest (merged into Meteor devel https://github.com/meteor/meteor/commit/df93f65)
 * Detect update available on first stream connection (merged into Meteor devel https://github.com/meteor/meteor/commit/514bf73)
 * [dont-cache-static-2](https://github.com/awwx/meteor/tree/dont-cache-static-2)
-* [bundler-record-urls-2](https://github.com/awwx/meteor/tree/bundler-record-urls-2)
+* [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2)
 * [app-html-include-manifest-1](https://github.com/awwx/meteor/tree/app-html-include-manifest-1)
 
-Combined in [appcache-bundle-4](https://github.com/awwx/meteor/tree/appcache-bundle-4).
+Combined in [appcache-bundle-5](https://github.com/awwx/meteor/tree/appcache-bundle-5).
 
 
 TODO

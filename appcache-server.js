@@ -54,7 +54,7 @@
   };
 
   app.use(function(req, res, next) {
-    var body, bundle_dir, hash, manifest, url, _i, _len, _ref;
+    var body, bundle_dir, hash, manifest, resource, _i, _len, _ref;
     if (req.url !== '/app.manifest') {
       return next();
     }
@@ -68,10 +68,12 @@
     manifest += '# ' + hash.digest('hex') + "\n\n";
     manifest += "CACHE:" + "\n";
     manifest += "/" + "\n";
-    _ref = bundler.app_info.urls;
+    _ref = bundler.app_info.manifest;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      url = _ref[_i];
-      manifest += url + "\n";
+      resource = _ref[_i];
+      if (resource.where === 'client') {
+        manifest += resource.url + "\n";
+      }
     }
     manifest += "\n";
     manifest += "NETWORK:\n";

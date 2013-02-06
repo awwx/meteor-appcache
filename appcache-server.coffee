@@ -60,8 +60,9 @@ app.use (req, res, next) ->
 
   manifest += "CACHE:" + "\n"
   manifest += "/" + "\n"
-  for url in bundler.app_info.urls
-    manifest += url + "\n"
+  for resource in bundler.app_info.manifest
+    if resource.where is 'client'
+      manifest += resource.url + "\n"
   manifest += "\n"
 
   ## Might do this if decide to use different URL's to reference
