@@ -116,7 +116,7 @@ Meteor Changes
 * [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2)
 * [app-html-include-manifest-1](https://github.com/awwx/meteor/tree/app-html-include-manifest-1)
 
-Combined in [appcache-bundle-5](https://github.com/awwx/meteor/tree/appcache-bundle-5).
+Combined in [appcache-bundle-6](https://github.com/awwx/meteor/tree/appcache-bundle-6).
 
 
 TODO
