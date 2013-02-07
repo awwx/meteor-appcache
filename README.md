@@ -116,7 +116,7 @@ Meteor Changes
 * [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2)
 * [app-html-include-manifest-1](https://github.com/awwx/meteor/tree/app-html-include-manifest-1)
 
-Combined in [appcache-bundle-5](https://github.com/awwx/meteor/tree/appcache-bundle-5).
+Combined in [appcache-bundle-6](https://github.com/awwx/meteor/tree/appcache-bundle-6).
 
 
 TODO
@@ -126,7 +126,7 @@ TODO
       do we need to not cache particular URLs used for logging in, etc.?  And if
       so, how should a package declare its requirements?)
 
-- [ ] We'll need a version of gzippo that supports a cache control header with max-age
+- [x] We'll need a version of gzippo that supports a cache control header with max-age
       set to zero (https://github.com/tomgco/gzippo/pull/49).  (What happens with the
       app cache is that browsers actually pay attention to the cache control headers,
       and then the browser doesn't fetch modified resources).
