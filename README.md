@@ -94,17 +94,17 @@ like this:
     {
       "meteor": {
         "git": "git://github.com/awwx/meteor.git",
-        "tag": "appcache-bundle-5"
+        "tag": "appcache-bundle-6"
       },
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-5"
+          "tag": "appcache-6"
         }
       }
     }
 
-keep the tag numbers in sync: appcache-bundle-5 with appcache-5, etc.
+keep the tag numbers in sync: appcache-bundle-6 with appcache-6, etc.
 
 
 Meteor Changes
