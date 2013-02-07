@@ -1,8 +1,8 @@
-app     = __meteor_bootstrap__.app
-bundler = __meteor_bootstrap__.bundler
-crypto  = __meteor_bootstrap__.require 'crypto'
-fs      = __meteor_bootstrap__.require 'fs'
-path    = __meteor_bootstrap__.require 'path'
+app    = __meteor_bootstrap__.app
+bundle = __meteor_bootstrap__.bundle
+crypto = __meteor_bootstrap__.require 'crypto'
+fs     = __meteor_bootstrap__.require 'fs'
+path   = __meteor_bootstrap__.require 'path'
 
 walk = (basedir, callback, dir = null) ->
   dirpath = if dir? then path.join(basedir, dir) else basedir
@@ -36,11 +36,11 @@ app.use (req, res, next) ->
   # compute a hash of *everything* that gets delivered to the client
   # during the initial web page load.
 
-  bundle_dir = bundler.bundle_dir
+  root = bundle.root
 
   hash = crypto.createHash('sha1')
   hash.update(JSON.stringify(__meteor_runtime_config__), 'utf8')
-  hash.update(fs.readFileSync(path.join(bundle_dir, 'app.html')))
+  hash.update(fs.readFileSync(path.join(root, 'app.html')))
 
   # We don't need to hash the js and css files because they're already
   # referenced with a URL that includes their hash; but we do need
@@ -51,8 +51,8 @@ app.use (req, res, next) ->
   # hashes for us -- that would save a lot of load at runtime, as this
   # code gets run on every request for the manifest.
 
-  hashdir(hash, path.join(bundle_dir, 'static'))
-  hashdir(hash, path.join(bundle_dir, 'static_cacheable'))
+  hashdir(hash, path.join(root, 'static'))
+  hashdir(hash, path.join(root, 'static_cacheable'))
 
   manifest = "CACHE MANIFEST\n\n"
 
@@ -60,7 +60,7 @@ app.use (req, res, next) ->
 
   manifest += "CACHE:" + "\n"
   manifest += "/" + "\n"
-  for resource in bundler.app_info.manifest
+  for resource in bundle.manifest
     if resource.where is 'client'
       manifest += resource.url + "\n"
   manifest += "\n"
@@ -69,7 +69,7 @@ app.use (req, res, next) ->
   ## assets depending on whether we're using the app cache or not.
   #
   # for basedir in ['static', 'static_cacheable']
-  #   walk path.join(bundle_dir, basedir), (filepath) ->
+  #   walk path.join(root, basedir), (filepath) ->
   #     manifest += "/" + filepath + "\n"
   # manifest += "\n"
 
