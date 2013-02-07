@@ -150,7 +150,7 @@ TODO
 
 - [x] Have bundler record list of URLs for us (since it generates them).
 
-- [ ] Get files hashes from the bundler instead of calculating them at
+- [x] Get files hashes from the bundler instead of calculating them at
       runtime.
 
 - [ ] Verbose server logging of requests for debugging.  (It's hard to
