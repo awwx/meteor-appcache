@@ -126,7 +126,7 @@ TODO
       do we need to not cache particular URLs used for logging in, etc.?  And if
       so, how should a package declare its requirements?)
 
-- [ ] We'll need a version of gzippo that supports a cache control header with max-age
+- [x] We'll need a version of gzippo that supports a cache control header with max-age
       set to zero (https://github.com/tomgco/gzippo/pull/49).  (What happens with the
       app cache is that browsers actually pay attention to the cache control headers,
       and then the browser doesn't fetch modified resources).
