@@ -99,12 +99,10 @@ like this:
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-6"
+          "tag": "appcache-7"
         }
       }
     }
-
-keep the tag numbers in sync: appcache-bundle-6 with appcache-6, etc.
 
 
 Meteor Changes
@@ -112,9 +110,9 @@ Meteor Changes
 
 * 404 on app.manifest (merged into Meteor devel https://github.com/meteor/meteor/commit/df93f65)
 * Detect update available on first stream connection (merged into Meteor devel https://github.com/meteor/meteor/commit/514bf73)
-* [dont-cache-static-2](https://github.com/awwx/meteor/tree/dont-cache-static-2)
-* [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2)
-* [app-html-include-manifest-1](https://github.com/awwx/meteor/tree/app-html-include-manifest-1)
+* [dont-cache-static-2](https://github.com/awwx/meteor/tree/dont-cache-static-2) (PR https://github.com/meteor/meteor/pull/671)
+* [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2) (PR https://github.com/meteor/meteor/pull/667)
+* [app-html-include-manifest-1](https://github.com/awwx/meteor/tree/app-html-include-manifest-1) (issue https://github.com/meteor/meteor/issues/670)
 
 Combined in [appcache-bundle-6](https://github.com/awwx/meteor/tree/appcache-bundle-6).
 
