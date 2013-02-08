@@ -85,7 +85,7 @@ Because there can be unexpected negative consequences for enabling the
 app cache in different browsers, we only enable the app cache for
 known browsers that we've tested and understand how they cache
 applications.  In addition Chrome and Firefox are disabled by default;
-you need to opt-in to enable app cache support for these browsers.
+you need to opt-in to enable app cache support for them.
 
 There are two mechanisms for configuring which browsers you'd like to
 enable app cache support for.  You can specify particular browsers to
