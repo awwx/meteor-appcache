@@ -125,7 +125,7 @@ configuration:
 
 Note that even if a browser is enabled the app cache may still not be
 used: the user may be using an older version of a browser which
-doesn't support an app cache, and in Firefox the user can decline the
+doesn't support an app cache, or in Firefox the user can decline the
 request to enable offline support.
 
 
