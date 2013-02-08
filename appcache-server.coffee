@@ -4,6 +4,9 @@ crypto = __meteor_bootstrap__.require 'crypto'
 fs     = __meteor_bootstrap__.require 'fs'
 path   = __meteor_bootstrap__.require 'path'
 
+Meteor._app_cache_manifest_hook = (req) ->
+  'manifest="/app.manifest"'
+
 app.use (req, res, next) ->
 
   return next() unless req.url is '/app.manifest'

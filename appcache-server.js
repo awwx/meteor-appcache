@@ -12,6 +12,10 @@
 
   path = __meteor_bootstrap__.require('path');
 
+  Meteor._app_cache_manifest_hook = function(req) {
+    return 'manifest="/app.manifest"';
+  };
+
   app.use(function(req, res, next) {
     var body, digest, hash, manifest, resource, _i, _j, _len, _len1, _ref, _ref1;
     if (req.url !== '/app.manifest') {
