@@ -192,3 +192,5 @@ TODO
 - [ ] Reactive data source which indicates that a code update is
       available.  (That is, a minor code update, since a major code
       update will trigger an automatic reload).
+
+- [ ] Investigate "DOM Exception 11".

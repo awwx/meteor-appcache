@@ -8,6 +8,7 @@ Meteor._reload.onMigrate 'appcache', (retry) ->
   return [true] if appcache_updated
 
   unless updating_appcache
+    # TODO got an "Uncaught Error: INVALID_STATE_ERR: DOM Exception 11" here once.
     window.applicationCache.update()
     updating_appcache = true
 
