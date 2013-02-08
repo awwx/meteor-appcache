@@ -94,7 +94,7 @@ like this:
     {
       "meteor": {
         "git": "git://github.com/awwx/meteor.git",
-        "tag": "appcache-bundle-6"
+        "tag": "appcache-bundle-7"
       },
       "packages": {
         "appcache": {
