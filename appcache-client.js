@@ -17,7 +17,12 @@
       return [true];
     }
     if (!updating_appcache) {
-      window.applicationCache.update();
+      try {
+        window.applicationCache.update();
+      } catch (e) {
+        Meteor._debug(e);
+        return [true];
+      }
       updating_appcache = true;
     }
     reload_retry = retry;

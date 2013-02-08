@@ -1,15 +1,70 @@
-app    = __meteor_bootstrap__.app
-bundle = __meteor_bootstrap__.bundle
-crypto = __meteor_bootstrap__.require 'crypto'
-fs     = __meteor_bootstrap__.require 'fs'
-path   = __meteor_bootstrap__.require 'path'
+app       = __meteor_bootstrap__.app
+bundle    = __meteor_bootstrap__.bundle
+crypto    = __meteor_bootstrap__.require 'crypto'
+fs        = __meteor_bootstrap__.require 'fs'
+path      = __meteor_bootstrap__.require 'path'
+useragent = __meteor_bootstrap__.require 'useragent'
+
+knownBrowsers =
+  ['android', 'chrome', 'firefox', 'IE', 'mobileSafari', 'opera', 'safari']
+
+browsersEnabledByDefault =
+  ['android', 'IE', 'mobileSafari', 'opera', 'safari']
+
+enabledBrowsers = {}
+enabledBrowsers[browser] = true for browser in browsersEnabledByDefault
+
+useragentFamilyToBrowser =
+  'Android':       'android'
+  'Chrome':        'chrome'
+  'Firefox':       'firefox'
+  'IE':            'IE'
+  'Mobile Safari': 'mobileSafari'
+  'Opera':         'opera'
+  'Safari':        'safari'
+
+Meteor.AppCache =
+  config: (options) ->
+    for option, value of options
+      if option is 'browsers'
+        enabledBrowsers = {}
+        for browser in value
+          enabledBrowsers[browser] = true
+      else if option in knownBrowsers
+        enabledBrowsers[option] = value
+      else
+        throw new Error('Unknown AppCache config option: ' + option)
+    undefined
+
+reqToBrowser = (req) ->
+  useragentFamilyToBrowser[useragent.lookup(req.headers['user-agent']).family]
+
+browserEnabled = (req) ->
+  enabledBrowsers[reqToBrowser(req)]
 
 Meteor._app_cache_manifest_hook = (req) ->
-  'manifest="/app.manifest"'
+  if browserEnabled(req)
+    'manifest="/app.manifest"'
+  else
+    ''
 
 app.use (req, res, next) ->
 
   return next() unless req.url is '/app.manifest'
+
+  # Browsers can get confused if we unconditionally serve the
+  # manifest.  If the app cache had previously been enabled for a
+  # browser, it will continue to fetch the manifest as long as it's
+  # available, even if we now are not including the manifest attribute
+  # in the app HTML.  (Firefox for example will continue to display
+  # "this website is asking to store data on your computer for offline
+  # use").  Returning a 404 gets the browser to really turn off the
+  # app cache.
+
+  unless browserEnabled(req)
+    res.writeHead(404)
+    res.end()
+    return
 
   # After the browser has downloaded the app files from the server and
   # has populated the browser's application cache, the browser will

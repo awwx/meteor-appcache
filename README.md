@@ -31,31 +31,6 @@ becomes available and the browser is able to establish a livedata
 connection).
 
 
-Browser Support
----------------
-
-The app cache enjoys wide browser support (http://caniuse.com/#feat=offline-apps);
-even IE 10 includes it now.  Older browsers will simply ignore the manifest
-attribute and the app will run as a regular online application.
-
-Chrome has a hard 5MB limit on the size of the app cache.  Sadly if you go
-over the limit Chrome doesn't do something sensible like fall back
-to treating the app like an online application but instead continues
-serve the app out of the stale cache... *and* the error condition is
-indistinguishable on the client and server from the client simply not
-having an Internet connection at the moment.  So if you want to use
-an app cache with Chrome you simply have to be very very careful that
-you never ever ever go over the 5MB limit or you're screwed.
-
-Firefox pops up a message "This website is asking to store data on your
-computer for offline use" Allow / Never For This Site / Not Now.  Which
-may or may not be OK depending on your audience and whether they're
-expecting the request or might be freaked out about it.
-
-My plan is to allow the developer to specify which browsers to enable the app
-cache for, and make Chrome and Firefox opt-in.
-
-
 Testing Only
 ------------
 
@@ -80,6 +55,80 @@ merged into Meteor's devel branch, so this should not be a problem for
 Meteor versions >= 0.5.5).
 
 
+Browser Support
+---------------
+
+The app cache is widely supported by browsers
+(http://caniuse.com/#feat=offline-apps).  Older browsers will ignore
+the manifest attribute and the app will run as a regular online
+application.
+
+However not all browsers tranparently support the app cache or
+gracefully fall back to just running the app online if offline support
+can't be enabled.
+
+Chrome has a 5MB limit on the size of the app cache.  If an app is
+first successfully cached (because you were under the limit) and then
+you go over the limit, Chrome *doesn't* disable the offline cache, but
+instead continues to run the *old* code out of the stale cache --
+forever until you drop below the limit again -- which means that going
+over the limit not only causes offline to stop working but breaks your
+app online as well.
+
+Firefox pops up a message "This website is asking to store data on
+your computer for offline use: Allow / Never For This Site / Not Now".
+Which may or may not be OK for you depending on your audience, whether
+they're expecting the request, or if they might be freaked out about
+it.
+
+Because there can be unexpected negative consequences for enabling the
+app cache in different browsers, we only enable the app cache for
+known browsers that we've tested and understand how they cache
+applications.  In addition Chrome and Firefox are disabled by default;
+you need to opt-in to enable app cache support for these browsers.
+
+There are two mechanisms for configuring which browsers you'd like to
+enable app cache support for.  You can specify particular browsers to
+enable or disable:
+
+````
+Meteor.AppCache.config({
+  firefox: true,
+  IE: false
+});
+````
+
+this says to enable the app cache for Firefox, to disable it for IE,
+and to use the defaults for the other browsers.
+
+You can also give an explicit list of browsers to enable:
+
+````
+Meteor.AppCache.config({
+  browsers: ['chrome', 'android']
+});
+````
+
+this enables the app cache for Chrome and Android, and disables it for
+all other browsers.
+
+The available browsers and their default enabled/disabled
+configuration:
+
+* `android` (enabled)
+* `chrome` (disabled)
+* `firefox` (disabled)
+* `IE` (enabled)
+* `mobileSafari` (enabled)
+* `opera` (enabled)
+* `safari` (enabled)
+
+Note that even if a browser is enabled the app cache may still not be
+used: the user may be using an older version of a browser which
+doesn't support an app cache, and in Firefox the user can decline the
+request to enable offline support.
+
+
 Use
 ---
 
@@ -94,12 +143,12 @@ like this:
     {
       "meteor": {
         "git": "git://github.com/awwx/meteor.git",
-        "tag": "appcache-bundle-7"
+        "tag": "appcache-bundle-8"
       },
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-7"
+          "tag": "appcache-8"
         }
       }
     }
@@ -112,9 +161,9 @@ Meteor Changes
 * Detect update available on first stream connection (merged into Meteor devel https://github.com/meteor/meteor/commit/514bf73)
 * Don't cache static (merged into Meteor devel https://github.com/meteor/meteor/commit/c208f68)
 * [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2) (PR https://github.com/meteor/meteor/pull/667)
-* [app-html-include-manifest-1](https://github.com/awwx/meteor/tree/app-html-include-manifest-1) (issue https://github.com/meteor/meteor/issues/670)
+* [app-cache-manifest-hook](https://github.com/awwx/meteor/tree/app-cache-manifest-hook) (issue https://github.com/meteor/meteor/issues/670)
 
-Combined in [appcache-bundle-7](https://github.com/awwx/meteor/tree/appcache-bundle-7).
+Combined in [appcache-bundle-8](https://github.com/awwx/meteor/tree/appcache-bundle-8).
 
 
 TODO
@@ -135,7 +184,7 @@ TODO
 - [ ] Meteor hook to allow the appcache package to set the manifest attribute in the
       html element.
 
-- [ ] Server-side browser detection so that the developer can choose which
+- [x] Server-side browser detection so that the developer can choose which
       browsers they want to enable the app cache for.
 
 - [x] Handle browsers that don't support an app cache.
@@ -160,7 +209,7 @@ TODO
 
 - [ ] Option to enable/disable verbose logging by the browser if so.
 
-- [ ] Option to disable app caching for particular browsers.
+- [x] Option to disable app caching for particular browsers.
 
 - [ ] Support URL routes: does manifest fallback work for this?
 

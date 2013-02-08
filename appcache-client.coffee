@@ -8,8 +8,17 @@ Meteor._reload.onMigrate 'appcache', (retry) ->
   return [true] if appcache_updated
 
   unless updating_appcache
-    # TODO got an "Uncaught Error: INVALID_STATE_ERR: DOM Exception 11" here once.
-    window.applicationCache.update()
+    try
+      window.applicationCache.update()
+    catch e
+      # seeing "INVALID_STATE_ERR: DOM Exception 11" here if app cache disabled
+      Meteor._debug e
+
+      # TODO if it is INVALID_STATE_ERR...
+
+      # There's no point in delaying the reload if we can't update the cache.
+      return [true]
+
     updating_appcache = true
 
   reload_retry = retry
@@ -28,6 +37,8 @@ window.applicationCache.addEventListener('noupdate',    cache_is_now_up_to_date,
 window.applicationCache.addEventListener(
   'obsolete',
   (->
+    # We're running old code and the app cache has been disabled.
+    # Reload immediately to get the new non-cached code.
     window.location.reload()
   ),
   false
