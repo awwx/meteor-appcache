@@ -100,18 +100,14 @@ app.use (req, res, next) ->
   ## Idea: can we support running the app on arbitrary URL's even
   ## when using the app cache?
   ## (e.g. https://github.com/tmeasday/meteor-router)
-  ## Needs more experimentation.
-  #
-  # manifest += "FALLBACK:\n"
-  # manifest += "/ /" + "\n\n"
+
+  manifest += "FALLBACK:\n"
+  for urlPrefix in Meteor._routePolicy.urlPrefixesFor('app')
+    manifest += urlPrefix + " /" + "\n"
 
   manifest += "NETWORK:\n"
-  # Never ever cache the manifest, or the app will never ever reload.
-  # Needed because otherwise the fallback on / will cache the
-  # manifest?  Maybe.  Needs more testing to be sure.
-  # manifest += "/app.manifest" + "\n"
-
-  manifest += "/sockjs" + "\n"
+  for urlPrefix in Meteor._routePolicy.urlPrefixesFor('network')
+    manifest += urlPrefix + "\n"
 
   # content length needs to be based on bytes
   body = new Buffer(manifest)

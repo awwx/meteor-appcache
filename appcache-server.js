@@ -74,7 +74,7 @@
   };
 
   app.use(function(req, res, next) {
-    var body, digest, hash, manifest, resource, _j, _k, _len1, _len2, _ref, _ref1;
+    var body, digest, hash, manifest, resource, urlPrefix, _j, _k, _l, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3;
     if (req.url !== '/app.manifest') {
       return next();
     }
@@ -106,8 +106,18 @@
       }
     }
     manifest += "\n";
+    manifest += "FALLBACK:\n";
+    _ref2 = Meteor._routePolicy.urlPrefixesFor('app');
+    for (_l = 0, _len3 = _ref2.length; _l < _len3; _l++) {
+      urlPrefix = _ref2[_l];
+      manifest += urlPrefix + " /" + "\n";
+    }
     manifest += "NETWORK:\n";
-    manifest += "/sockjs" + "\n";
+    _ref3 = Meteor._routePolicy.urlPrefixesFor('network');
+    for (_m = 0, _len4 = _ref3.length; _m < _len4; _m++) {
+      urlPrefix = _ref3[_m];
+      manifest += urlPrefix + "\n";
+    }
     body = new Buffer(manifest);
     res.setHeader('Content-Type', 'text/cache-manifest');
     res.setHeader('Content-Length', body.length);
