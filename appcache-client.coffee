@@ -1,5 +1,16 @@
 return unless window.applicationCache?
 
+appCacheStatuses = [
+  'uncached',
+  'idle',
+  'checking',
+  'downloading',
+  'updateready',
+  'obsolete'
+]
+
+console.log appCacheStatuses[window.applicationCache.status]
+
 updating_appcache = false
 reload_retry = null
 appcache_updated = false
@@ -7,23 +18,22 @@ appcache_updated = false
 Meteor._reload.onMigrate 'appcache', (retry) ->
   return [true] if appcache_updated
 
+  # An uncached application (one that does not have a manifest) cannot
+  # be updated.
+  if window.applicationCache.status is window.applicationCache.UNCACHED
+    return [true]
+
   unless updating_appcache
     try
       window.applicationCache.update()
     catch e
-      # seeing "INVALID_STATE_ERR: DOM Exception 11" here if app cache disabled
-      Meteor._debug e
-
-      # TODO if it is INVALID_STATE_ERR...
-
+      Meteor._debug 'applicationCache update error', e
       # There's no point in delaying the reload if we can't update the cache.
       return [true]
-
     updating_appcache = true
 
   reload_retry = retry
-
-  false
+  return false
 
 cache_is_now_up_to_date = ->
   return unless updating_appcache

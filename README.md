@@ -148,7 +148,7 @@ like this:
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-9"
+          "tag": "appcache-10"
         }
       }
     }
@@ -170,7 +170,7 @@ Combined in [appcache-bundle-9](https://github.com/awwx/meteor/tree/appcache-bun
 TODO
 ----
 
-- [ ] PR 667 merged.
+- [ ] Merge PR 667.
 
 - [ ] create PR for routepolicy.
 
@@ -247,4 +247,4 @@ TODO
       available.  (That is, a minor code update, since a major code
       update will trigger an automatic reload).
 
-- [ ] Investigate "DOM Exception 11".
+- [x] Investigate "DOM Exception 11".
