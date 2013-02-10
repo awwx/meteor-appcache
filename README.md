@@ -161,15 +161,22 @@ Meteor Changes
 * Detect update available on first stream connection (merged into Meteor devel https://github.com/meteor/meteor/commit/514bf73)
 * Don't cache static (merged into Meteor devel https://github.com/meteor/meteor/commit/c208f68)
 * [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2) (PR https://github.com/meteor/meteor/pull/667)
+* [routepolicy](https://github.com/awwx/meteor/tree/routepolicy)
 * [app-cache-manifest-hook](https://github.com/awwx/meteor/tree/app-cache-manifest-hook) (issue https://github.com/meteor/meteor/issues/670)
 
-Combined in [appcache-bundle-8](https://github.com/awwx/meteor/tree/appcache-bundle-8).
+Combined in [appcache-bundle-9](https://github.com/awwx/meteor/tree/appcache-bundle-9).
 
 
 TODO
 ----
 
-- [ ] Check how the app cache interacts with the accounts system.  (For example,
+- [ ] PR 667 merged.
+
+- [ ] create PR for routepolicy.
+
+- [ ] create PR for app-cache-manifest-hook.
+
+- [x] Check how the app cache interacts with the accounts system.  (For example,
       do we need to not cache particular URLs used for logging in, etc.?  And if
       so, how should a package declare its requirements?)
 
@@ -181,7 +188,7 @@ TODO
 - [ ] Check total size of files included in the manifest and warn or disable the
       app cache if Chrome is enabled and the total size > 5MB.
 
-- [ ] Meteor hook to allow the appcache package to set the manifest attribute in the
+- [x] Meteor hook to allow the appcache package to set the manifest attribute in the
       html element.
 
 - [x] Server-side browser detection so that the developer can choose which
@@ -211,7 +218,7 @@ TODO
 
 - [x] Option to disable app caching for particular browsers.
 
-- [ ] Support URL routes: does manifest fallback work for this?
+- [x] Support URL routes: does manifest fallback work for this?
 
 - [ ] Different cache manifests for different URLs? (e.g. cache the
       images of one slideshow to view offline).
