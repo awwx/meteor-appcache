@@ -97,13 +97,10 @@ app.use (req, res, next) ->
       manifest += resource.url + "\n"
   manifest += "\n"
 
-  ## Idea: can we support running the app on arbitrary URL's even
-  ## when using the app cache?
-  ## (e.g. https://github.com/tmeasday/meteor-router)
-
   manifest += "FALLBACK:\n"
   for urlPrefix in Meteor._routePolicy.urlPrefixesFor('app')
     manifest += urlPrefix + " /" + "\n"
+  manifest += "\n"
 
   manifest += "NETWORK:\n"
   for urlPrefix in Meteor._routePolicy.urlPrefixesFor('network')
@@ -115,3 +112,25 @@ app.use (req, res, next) ->
   res.setHeader('Content-Type', 'text/cache-manifest')
   res.setHeader('Content-Length', body.length)
   res.end(body)
+
+sizeCheck = ->
+  totalSize = 0
+  for resource in bundle.manifest
+    if resource.where is 'client'
+      totalSize += resource.size
+  if totalSize > 5 * 1024 * 1024
+    Meteor._debug(
+      "** You are publishing " + totalSize + " bytes of assets (including\n" +
+      "** the contents of the public/ directory) to be stored in the\n" +
+      "** browser's application cache.\n" +
+      "**\n" +
+      "** Browsers differ in the amount of data they will store in the app\n" +
+      "** cache, and if you go over their limit they don't gracefully fallback to\n" +
+      "** just running the app online (going over their limit breaks the app online\n" +
+      "** as well as making it not cacheable for offline use).\n" +
+      "**\n" +
+      "** To avoid this problem we recommend keeping the size of your static\n" +
+      "** application assets under 5MB."
+    )
+
+sizeCheck()

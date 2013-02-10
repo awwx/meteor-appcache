@@ -185,8 +185,8 @@ TODO
       app cache is that browsers actually pay attention to the cache control headers,
       and then the browser doesn't fetch modified resources).
 
-- [ ] Check total size of files included in the manifest and warn or disable the
-      app cache if Chrome is enabled and the total size > 5MB.
+- [x] Check total size of files included in the manifest and warn if
+      it is greater than 5MB.
 
 - [x] Meteor hook to allow the appcache package to set the manifest attribute in the
       html element.
@@ -220,20 +220,24 @@ TODO
 
 - [x] Support URL routes: does manifest fallback work for this?
 
-- [ ] Different cache manifests for different URLs? (e.g. cache the
-      images of one slideshow to view offline).
+- [-] Different cache manifests for different URLs? (e.g. cache the
+      images of one slideshow to view offline).  (Will not do:
+      decided it is out of scope of the appcache project to use the
+      app cache to cache dynamic resources).
 
-- [ ] ...Or is there a better way to cache assets conditionally?
+- [-] ...Or is there a better way to cache assets conditionally?
       Maybe using client storage somehow instead of the app cache...?
-      Especially for Chrome which has a 5mb app cache limit.
 
 - [ ] Client-side error logging and reporting that works offline and
       across page reloads.
 
 - [ ] "online-only" directory for assets too big to be cached.
 
-- [ ] Option to specify additional URLs to be cached (e.g. images from
-      another domain such as a CDN).
+- [-] Option to specify additional URLs to be cached (e.g. images from
+      another domain such as a CDN).  (This is now not looking like a
+      good idea given the limits browsers have on the size of the app
+      cache and how they react poorly to an application going over the
+      limit).
 
 - [ ] Reactive data source which indicates whether the app is
       currently cached or not. (An app may not be cached because this
