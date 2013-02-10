@@ -9,7 +9,7 @@ knownBrowsers =
   ['android', 'chrome', 'firefox', 'IE', 'mobileSafari', 'opera', 'safari']
 
 browsersEnabledByDefault =
-  ['android', 'IE', 'mobileSafari', 'opera', 'safari']
+  ['android', 'chrome', 'IE', 'mobileSafari', 'opera', 'safari']
 
 enabledBrowsers = {}
 enabledBrowsers[browser] = true for browser in browsersEnabledByDefault

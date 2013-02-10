@@ -63,29 +63,18 @@ The app cache is widely supported by browsers
 the manifest attribute and the app will run as a regular online
 application.
 
-However not all browsers tranparently support the app cache or
-gracefully fall back to just running the app online if offline support
-can't be enabled.
+When an app cache is enabled Firefox will pop up a message "This
+website is asking to store data on your computer for offline use" and
+will ask the user whether to allow or deny the request.
 
-Chrome has a 5MB limit on the size of the app cache.  If an app is
-first successfully cached (because you were under the limit) and then
-you go over the limit, Chrome *doesn't* disable the offline cache, but
-instead continues to run the *old* code out of the stale cache --
-forever until you drop below the limit again -- which means that going
-over the limit not only causes offline to stop working but breaks your
-app online as well.
+While many users will understand what this means, some users may
+possibly be alarmed by the browser warning, and could choose not to
+run the app in preference to enabling something they don't understand.
 
-Firefox pops up a message "This website is asking to store data on
-your computer for offline use: Allow / Never For This Site / Not Now".
-Which may or may not be OK for you depending on your audience, whether
-they're expecting the request, or if they might be freaked out about
-it.
-
-Because there can be unexpected negative consequences for enabling the
-app cache in different browsers, we only enable the app cache for
-known browsers that we've tested and understand how they cache
-applications.  In addition Chrome and Firefox are disabled by default;
-you need to opt-in to enable app cache support for them.
+The goal of the appcache package is to work transparently: you should
+be able to add the appcache package without it changing the behavior
+of your application in supported browser.  Since this is not possible
+on Firefox, the app cache is disabled in Firefox by default.
 
 There are two mechanisms for configuring which browsers you'd like to
 enable app cache support for.  You can specify particular browsers to
@@ -116,7 +105,7 @@ The available browsers and their default enabled/disabled
 configuration:
 
 * `android` (enabled)
-* `chrome` (disabled)
+* `chrome` (enabled)
 * `firefox` (disabled)
 * `IE` (enabled)
 * `mobileSafari` (enabled)
@@ -148,7 +137,7 @@ like this:
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-11"
+          "tag": "appcache-12"
         }
       }
     }
