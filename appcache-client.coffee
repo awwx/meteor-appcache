@@ -9,7 +9,7 @@ appCacheStatuses = [
   'obsolete'
 ]
 
-console.log appCacheStatuses[window.applicationCache.status]
+# Meteor._debug appCacheStatuses[window.applicationCache.status]
 
 updating_appcache = false
 reload_retry = null

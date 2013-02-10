@@ -148,7 +148,7 @@ like this:
       "packages": {
         "appcache": {
           "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-10"
+          "tag": "appcache-11"
         }
       }
     }

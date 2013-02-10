@@ -8,8 +8,6 @@
 
   appCacheStatuses = ['uncached', 'idle', 'checking', 'downloading', 'updateready', 'obsolete'];
 
-  console.log(appCacheStatuses[window.applicationCache.status]);
-
   updating_appcache = false;
 
   reload_retry = null;
