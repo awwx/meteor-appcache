@@ -125,6 +125,29 @@ by loading the application from the cache, and then updating if a new
 version is available.
 
 
+The App Cache and Meteor Code Reloads
+-------------------------------------
+
+The appcache package is designed to support Meteor's hot code reload
+feature.  (If you see any problems with code reloads when using the
+app cache, please report it as a bug).  With the appcache package
+installed a code reload will follow these steps:
+
+* Meteor's livedata stream connection notices that a code update is
+  available and initiates a reload.
+
+* The appcache package plugs into Meteor's reload `onMigrate` hook.
+  When reload notifies appcache that a reload has started, the
+  appcache package calls `window.applicationCache.update()` to ask the
+  browser to update the app cache.  The appcache package then reports
+  back to reload that it isn't ready for migration yet... until the
+  browser reports that the app cache has finished updating.  The
+  reload is thus delayed until the new code is in the cache.
+
+* Meteor's reload calls `window.location.reload()`, which reloads
+  the app in the web page with the new code in the app cache.
+
+
 Browser Support
 ---------------
 
