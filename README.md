@@ -31,6 +31,19 @@ becomes available and the browser is able to establish a livedata
 connection).
 
 
+WARNING
+-------
+
+DO NOT USE THIS CODE for users of an app published on a domain if
+there is ANY chance that you will EVER want to go back to using Meteor
+<= 0.5.4 on that domain.  Meteor 0.5.4 and below does not return a 404
+for the app manifest file, so your users who have the app cached will
+be STUCK running your old code out of their app cache *even though you
+aren't using the appcache package any more*.  (A workaround has been
+merged into Meteor's devel branch, so this won't be a problem for
+Meteor versions >= 0.5.5).
+
+
 For Caching Static Resources Only
 ---------------------------------
 
@@ -110,19 +123,6 @@ browser is able to connect.  So rather than waiting, not knowing how
 long the wait may be, instead we enable using the application offline
 by loading the application from the cache, and then updating if a new
 version is available.
-
-
-WARNING
--------
-
-DO NOT USE THIS CODE for users of an app published on a domain if
-there is ANY chance that you will EVER want to go back to using Meteor
-<= 0.5.4 on that domain.  Meteor 0.5.4 and below does not return a 404
-for the app manifest file, so your users will be STUCK running your
-old code out of their app cache *even though you aren't using the
-appcache package any more*.  (A workaround has been merged into
-Meteor's devel branch, so this should not be a problem for Meteor
-versions >= 0.5.5).
 
 
 Browser Support
