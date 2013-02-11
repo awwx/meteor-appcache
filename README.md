@@ -1,13 +1,10 @@
-appcache
-========
-
-Future home of the appcache smart package, currently under
-development.  (Not ready to be used with applications
-published to users yet).
+This repository contains information about the appcache package.
+The code has been moved to a custom Meteor branch:
+https://github.com/awwx/meteor/tree/appcache-1
 
 
-About
------
+About the App Cache
+-------------------
 
 The application cache is an HTML5 feature which allows the static
 resources for a web application (HTML, Javascript, CSS, images)
@@ -214,26 +211,24 @@ request to enable offline support.
 Use
 ---
 
-The appcache package relies on hacks to Meteor; these hacks need
-further work before they're ready to be made into pull requests.  The
-hacks are based off of and follow Meteor's development branch.
+Pending completion of pull requests to Meteor core, the appcache
+package is currently implemented in a custom Meteor branch.
 
-With
-[meteorite](http://oortcloud.github.com/meteorite/) use a smart.json
-like this:
+````
+$ git clone git://github.com/awwx/meteor.git
+$ cd meteor
+$ git checkout appcache-1
+````
 
-    {
-      "meteor": {
-        "git": "git://github.com/awwx/meteor.git",
-        "tag": "appcache-bundle-9"
-      },
-      "packages": {
-        "appcache": {
-          "git": "git://github.com/awwx/meteor-appcache.git",
-          "tag": "appcache-12"
-        }
-      }
-    }
+Or, using [meteorite](http://oortcloud.github.com/meteorite/),
+reference the branch in your smart.json file like this:
+
+````
+"meteor": {
+  "git": "git://github.com/awwx/meteor.git",
+  "branch": "appcache-1"
+}
+````
 
 
 Meteor Changes
@@ -245,8 +240,6 @@ Meteor Changes
 * [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2) (PR https://github.com/meteor/meteor/pull/667)
 * [routepolicy](https://github.com/awwx/meteor/tree/routepolicy)
 * [app-cache-manifest-hook](https://github.com/awwx/meteor/tree/app-cache-manifest-hook) (issue https://github.com/meteor/meteor/issues/670)
-
-Combined in [appcache-bundle-9](https://github.com/awwx/meteor/tree/appcache-bundle-9).
 
 
 TODO
