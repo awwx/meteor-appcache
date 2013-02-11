@@ -31,28 +31,98 @@ becomes available and the browser is able to establish a livedata
 connection).
 
 
-Testing Only
-------------
+For Caching Static Resources Only
+---------------------------------
 
-This release is for testing only.
+When a browser displays an image in an application, we can describe
+that image as either being static (it stays the same for any
+particular version of the application) or dynamic (it can change as
+the application is being used).
 
-Testers should be comfortable with and know how to manually delete the
-app cache in their browser.  It is remarkably easy with an app cache
-to get wedged where a configuration error causes the browser to not
-refresh the cached app with new code from the server.  You're then
-stuck because you can fix things on the server all you want but none
-of those fixes get to the client because the browser isn't contacting
-the server any more.  (I hope I don't have any more bugs like that left,
-but don't count on it yet).
+For example, a "todo" app might display a green checkmark image for
+completed todo items.  This would be a static image, because it is
+part of the application and changing the image would require a code
+push.
+
+Conversely, we might imagine that the app could allow the user to
+upload images to add to a todo item's description.  These images would
+be dynamic images, because new images can be added and images can be
+images as the application is running.
+
+The appcache package is only designed to cache static resources.  As
+an "application cache", it caches the resources needed by the
+application, including the HTML, CSS, Javascript and files published
+in the public/ directory.
+
+Different browsers have different limits on the size of the
+application cache, and generally respond poorly to going over the
+limit.  To the application, going over the limit results in a cache
+update error which is indistinguishable from the user merely not
+having an Internet connection at the moment.  The cache update failure
+then causes the browser to use the *old* outdated cache, which means
+the application not only will not work offline but is broken online as
+well.
+
+Thus when using the appcache package we recommend keeping the static
+size of the client application resources including the public/
+directory under 5MB.  The appcache package will print a warning if the
+total size of the resources being added to the app cache goes over
+this.
+
+
+How the Browser Uses the App Cache
+----------------------------------
+
+A key to understanding how the browser uses the application cache is this:
+
+> The browser always loads the app cache in the background.
+
+Or, to put it another another way, the browser never waits for the app
+cache to be updated.
+
+For example, consider what happens when a user navigates to the app's
+web page for the first time, when they don't have the application
+cached yet.  The browser will load the app as if it were a standard
+online application not using an app cache; and then the browser will
+also populate the app cache in the background.  The *second* time the
+user opens the web page the browser load the app from the cache.  Why?
+Because the browser never waits for the app cache to loaded.  The
+first time the user opens the page the cache hasn't been loaded yet,
+and so the browser loads the page incrementally from the server as it
+does for web pages that aren't cached enabled.
+
+As another example, suppose the user has previously opened the web
+page and so has an old copy of the application in the app cache.  The
+user now returns to the web page, but in the meantime a new version of
+the application has been published.  What happens?  Since the browser
+never waits for the app cache, it will at first display the old
+version of the web page.  Then, as Meteor makes its livedata
+connection and sees that a code update is available, the page will
+reload with the new code.
+
+This behavior may seem strange.  Why not check first to see if new
+code is available and avoid potentially briefly displaying an old
+version of the app?  But consider if the user is offline, or has a bad
+or intermittent Internet connection.  We don't know *how long* it will
+take to discover that a new version of the app is available.  It could
+be five seconds or a minute or an hour... depending on when the
+browser is able to connect.  So rather than waiting, not knowing how
+long the wait may be, instead we enable using the application offline
+by loading the application from the cache, and then updating if a new
+version is available.
+
+
+WARNING
+-------
 
 DO NOT USE THIS CODE for users of an app published on a domain if
 there is ANY chance that you will EVER want to go back to using Meteor
-<= 0.5.4 on that domain.  The currently released version of Meteor
-does not return a 404 for the app manifest file, so your users will be
-STUCK running your old code out of their app cache even though you
-aren't using the appcache package any more.  (A workaround has been
-merged into Meteor's devel branch, so this should not be a problem for
-Meteor versions >= 0.5.5).
+<= 0.5.4 on that domain.  Meteor 0.5.4 and below does not return a 404
+for the app manifest file, so your users will be STUCK running your
+old code out of their app cache *even though you aren't using the
+appcache package any more*.  (A workaround has been merged into
+Meteor's devel branch, so this should not be a problem for Meteor
+versions >= 0.5.5).
 
 
 Browser Support
