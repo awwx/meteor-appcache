@@ -89,7 +89,7 @@ user opens the web page the browser load the app from the cache.  Why?
 Because the browser never waits for the app cache to loaded.  The
 first time the user opens the page the cache hasn't been loaded yet,
 and so the browser loads the page incrementally from the server as it
-does for web pages that aren't cached enabled.
+does for web pages that aren't cache enabled.
 
 As another example, suppose the user has previously opened the web
 page and so has an old copy of the application in the app cache.  The
