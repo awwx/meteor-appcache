@@ -44,8 +44,8 @@ merged into Meteor's devel branch, so this won't be a problem for
 Meteor versions >= 0.5.5).
 
 
-For Caching Static Resources Only
----------------------------------
+Caches Static Resources Only
+----------------------------
 
 When a browser displays an image in an application, we can describe
 that image as either being static (it stays the same for any
