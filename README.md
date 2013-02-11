@@ -196,14 +196,16 @@ TODO
 - [x] Get files hashes from the bundler instead of calculating them at
       runtime.
 
-- [ ] Verbose server logging of requests for debugging.  (It's hard to
+- [-] Verbose server logging of requests for debugging.  (It's hard to
       see what is actually happening on the network from the browser
-      when an app cache is used).
+      when an app cache is used).  (Separate diagnostics or testing
+      project).
 
-- [ ] Does disabling event propagation in appcache event stop verbose
-      logging by the browser in the console log?
+- [x] Does disabling event propagation in appcache event stop verbose
+      logging of app cache events by Chrome in the console log?
+      Answer: no.
 
-- [ ] Option to enable/disable verbose logging by the browser if so.
+- [-] Option to enable/disable verbose logging by the browser if so.
 
 - [x] Option to disable app caching for particular browsers.
 
@@ -217,10 +219,12 @@ TODO
 - [-] ...Or is there a better way to cache assets conditionally?
       Maybe using client storage somehow instead of the app cache...?
 
-- [ ] Client-side error logging and reporting that works offline and
-      across page reloads.
+- [-] Client-side error logging and reporting that works offline and
+      across page reloads.  (Separate diagnostics or testing project).
 
-- [ ] "online-only" directory for assets too big to be cached.
+- [-] "online-only" directory for assets too big to be cached.
+      (Probably better to be storing large assets in e.g. S3 rather
+      than creating a giant bundle).
 
 - [-] Option to specify additional URLs to be cached (e.g. images from
       another domain such as a CDN).  (This is now not looking like a
@@ -228,16 +232,19 @@ TODO
       cache and how they react poorly to an application going over the
       limit).
 
-- [ ] Reactive data source which indicates whether the app is
-      currently cached or not. (An app may not be cached because this
-      is the first visit and the cache is loading, the browser doesn't
-      support it, the programmer specified that the app cache should
-      not be used for particular browsers, the user declined to allow
-      offline use in Firefox, app caching is disabled for the domain
-      in the browser settings, etc).
+- [-] Reactive data source which indicates whether the app is
+      currently cached or not.  This could be accomplished by
+      inserting Javascript into the head element
+      (http://googlecode.blogspot.com/2009/05/gmail-for-mobile-html5-series-part-2.html).
+      But I'm not sure what we'd actually use it for.
 
-- [ ] Reactive data source which indicates that a code update is
+- [-] Reactive data source which indicates that a code update is
       available.  (That is, a minor code update, since a major code
-      update will trigger an automatic reload).
+      update will trigger an automatic reload).  I thought I was going
+      to do this by watching the app cache updateready event.  However
+      this would mean that the feature of "a minor code update is
+      available" would only be available when using the appcache.
+      This would be better as a stream feature, so that it would work
+      without the appcache as well.
 
 - [x] Investigate "DOM Exception 11".
