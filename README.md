@@ -106,7 +106,7 @@ does for web pages that aren't cache enabled.
 
 As another example, suppose the user has previously opened the web
 page and so has an old copy of the application in the app cache.  The
-user now returns to the web page, but in the meantime a new version of
+user now returns to the web page, and in the meantime a new version of
 the application has been published.  What happens?  Since the browser
 never waits for the app cache, it will at first display the old
 version of the web page.  Then, as Meteor makes its livedata
