@@ -1,6 +1,6 @@
 This repository contains information about the appcache package.
 The code has been moved to a custom Meteor branch:
-https://github.com/awwx/meteor/tree/appcache-1
+https://github.com/awwx/meteor/tree/appcache-2
 
 
 About the App Cache
@@ -217,7 +217,7 @@ package is currently implemented in a custom Meteor branch.
 ````
 $ git clone git://github.com/awwx/meteor.git
 $ cd meteor
-$ git checkout appcache-1
+$ git checkout appcache-2
 ````
 
 Or, using [meteorite](http://oortcloud.github.com/meteorite/),
@@ -226,7 +226,7 @@ reference the branch in your smart.json file like this:
 ````
 "meteor": {
   "git": "git://github.com/awwx/meteor.git",
-  "branch": "appcache-1"
+  "branch": "appcache-2"
 }
 ````
 
@@ -237,19 +237,19 @@ Meteor Changes
 * 404 on app.manifest (merged into Meteor devel https://github.com/meteor/meteor/commit/df93f65)
 * Detect update available on first stream connection (merged into Meteor devel https://github.com/meteor/meteor/commit/514bf73)
 * Don't cache static (merged into Meteor devel https://github.com/meteor/meteor/commit/c208f68)
-* [bundler-manifest-2](https://github.com/awwx/meteor/tree/bundler-manifest-2) (PR https://github.com/meteor/meteor/pull/667)
-* [routepolicy](https://github.com/awwx/meteor/tree/routepolicy)
-* [app-cache-manifest-hook](https://github.com/awwx/meteor/tree/app-cache-manifest-hook) (issue https://github.com/meteor/meteor/issues/670)
+* Bundler manifest (merged devel https://github.com/meteor/meteor/pull/667)
+* Route policy (merged https://github.com/meteor/meteor/pull/679)
+* [app-cache-manifest-hook](https://github.com/awwx/meteor/tree/html-attributes-browser-identification) (PR https://github.com/meteor/meteor/pull/680)
 
 
 TODO
 ----
 
-- [ ] Merge PR 667.
+- [x] Merge PR 667.
 
-- [ ] create PR for routepolicy.
+- [x] create PR for routepolicy.
 
-- [ ] create PR for app-cache-manifest-hook.
+- [x] create PR for app-cache-manifest-hook.
 
 - [x] Check how the app cache interacts with the accounts system.  (For example,
       do we need to not cache particular URLs used for logging in, etc.?  And if
