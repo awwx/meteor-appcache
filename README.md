@@ -1,3 +1,5 @@
+# appcache
+
 Project home of the appcache package.
 
 The code is now in a Meteor branch:
@@ -40,9 +42,27 @@ $ ~/meteor-appcache/meteor add appcache
 $ ~/meteor-appcache/meteor
 ````
 
+You may find it convenient to create a symbolic link in your PATH so
+that you don't need to type `~/meteor-appcache/meteor` all the time.
+If `~/bin` is on your PATH:
+
+````
+$ cd ~/bin
+$ ln -s ~/meteor-appcache/meteor m
+````
+
+where `m` is whatever abbreviation you'd like to use to refer to the
+appcache version of Meteor.
+
+````
+$ cd ~/myapp
+$ m add appcache
+$ m
+````
+
 ### Using Meteorite
 
-If you use Meteorite, you specify the Meteor `appcache` branch in your
+If you use Meteorite, specify the Meteor `appcache` branch in your
 `smart.json` file:
 
 ````
