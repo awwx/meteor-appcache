@@ -8,7 +8,7 @@ https://github.com/meteor/meteor/tree/appcache
 API documentation is available here:
 https://github.com/meteor/meteor/blob/appcache/docs/client/packages/appcache.html
 
-And background information about the browser application cache and how
+Background information about the browser application cache and how
 it interacts with Meteor is in the Meteor Wiki:
 https://github.com/meteor/meteor/wiki/AppCache
 
