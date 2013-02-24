@@ -3,18 +3,27 @@ Project home of the appcache package.
 The code is now in a Meteor branch:
 https://github.com/meteor/meteor/tree/appcache
 
-Documentation is available here:
+API documentation is available here:
 https://github.com/meteor/meteor/blob/appcache/docs/client/packages/appcache.html
-and in the Meteor Wiki:
+
+And background information about the browser application cache and how
+it interacts with Meteor is in the Meteor Wiki:
 https://github.com/meteor/meteor/wiki/AppCache
 
 
-## Try
+## Use
 
-### From a Meteor checkout
+You can use the appcache package either by running `meteor` directly
+or by using
+[Meteorite](http://oortcloud.github.com/meteorite/).
 
-Checking out the appcache branch looks like this (this puts the checkout in
-your home directory, but you can put it anywhere):
+### Using Meteor
+
+If you normally run Meteor with the `meteor` command, you can run
+Meteor directly from a git checkout of the `appcache` branch.
+
+This example puts the checkout in your home directory (but you can put
+it anywhere):
 
 ````
 $ cd
@@ -29,6 +38,31 @@ You can now run Meteor directly from the checkout:
 $ cd ~/myapp
 $ ~/meteor-appcache/meteor add appcache
 $ ~/meteor-appcache/meteor
+````
+
+### Using Meteorite
+
+If you use Meteorite, you specify the Meteor `appcache` branch in your
+`smart.json` file:
+
+````
+{
+  "meteor": {
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "appcache"
+  },
+  "packages": {}
+}
+````
+
+Note that because `appcache` is a core package, it should not be
+listed in the smart.json `packages` section.
+
+Now you can add the `appcache` package and run your application:
+
+````
+$ mrt add appcache
+$ mrt
 ````
 
 
