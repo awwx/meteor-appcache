@@ -5,8 +5,8 @@ Project home of the appcache package.
 The code is now in a Meteor branch:
 https://github.com/meteor/meteor/tree/appcache
 
-API documentation is available here:
-https://github.com/meteor/meteor/blob/appcache/docs/client/packages/appcache.html
+API documentation is available in the pre-release documentation:
+http://devel-docs.meteor.com/#appcache
 
 Background information about the browser application cache and how
 it interacts with Meteor is in the Meteor Wiki:
@@ -84,6 +84,14 @@ Now you can add the `appcache` package and run your application:
 $ mrt add appcache
 $ mrt
 ````
+
+
+## Deploy
+
+Because there are no dev_bundle changes in the `appcache` branch, you
+can deploy applications using the `appcache` package to *.meteor.com
+even though the released version of Meteor doesn't include the package
+yet.  Simply use the standard `meteor deploy` command.
 
 
 ## Thank you
