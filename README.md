@@ -13,6 +13,19 @@ it interacts with Meteor is in the Meteor Wiki:
 https://github.com/meteor/meteor/wiki/AppCache
 
 
+## Broken at the moment
+
+The appcache package is currently unusable at the moment due to a
+problem with interacting caches:
+
+* if you use a resource without a "cache busting" URL (such as
+  `<img src="/image.jpg">`), changing the resource on the server
+  won't cause the resource to be reloaded in the browser,
+
+* but if you do use a cache busting URL ("/image.jpg?a492b3..."), that
+  version of the URL isn't being cached by the app cache.
+
+
 ## Use
 
 You can use the appcache package either by running `meteor` directly
